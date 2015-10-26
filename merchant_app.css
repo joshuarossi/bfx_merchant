@@ -1,0 +1,13 @@
+/* CSS declarations go here */
+body {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  padding: 10px;
+  font-family: sans-serif;
+  color: white;
+  background-image: linear-gradient(to bottom, darkgrey, lightgrey 100%);
+  background-attachment: fixed;
+  position: absolute;
+}

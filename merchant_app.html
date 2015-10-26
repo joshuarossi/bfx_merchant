@@ -1,0 +1,52 @@
+<head>
+    <title>Bitfinex Merchant</title>
+
+</head>
+
+<body>
+<h1>Bitfinex Merchant</h1>
+{{#unless has_creds}}
+    {{> auth}}
+{{else}}
+    {{> get_amount}}
+{{/unless}}
+</body>
+<template name="auth">
+    <div>
+        <h2> Authenticate</h2>
+
+        <form>
+            <input type="password" name="api_key" placeholder="Enter your API Key">
+            <br>
+            <input type="password" name="api_secret" placeholder="Enter your API Secret">
+            <br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</template>
+<template name="get_amount">
+    <a href="{{uri}}">
+        <div id="qrcode"></div>
+    </a>
+
+    <div>
+        <br>
+        URI: <strong><a href={{uri}}>{{uri}}</a></strong>
+        <br>
+        BTC: <strong>{{convert}}</strong>
+        <br>
+        Amount: <strong>{{amount}}</strong>
+        <br>
+        Price: <strong>{{price}}</strong>
+        <br>
+        Address: <strong>{{address}}</strong>
+        <br>
+    </div>
+    <form>
+        <input name="amount" type="number" min="0" step=".01" placeholder="Enter Dollar Amount">
+        <br>
+        <input name="address" type="text" placeholder="Enter Address">
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+</template>
