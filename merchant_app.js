@@ -55,17 +55,13 @@ if (Meteor.isClient) {
         return Session.get("price");
     });
     Template.get_amount.events({
-        'submit form': function () {
-            event.preventDefault();
-            var amount = event.target.amount.value;
-            var address = event.target.address.value;
-            if (amount) {
-                Session.set('amount', Number(amount));
-            }
-            if (address) {
-                Session.set('address', address)
-            }
-            event.target.amount.value = "";
+        'keyup #amount': function () {
+            var amount = event.target.value;
+            Session.set('amount', amount);
+        },
+        'keyup #address': function () {
+            var address = event.target.value;
+            Session.set('address', address);
         }
     });
     Template.get_amount.onRendered(function () {
