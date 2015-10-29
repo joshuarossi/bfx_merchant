@@ -1,10 +1,20 @@
 if (Meteor.isClient) {
     Meteor.startup(function () {
         Session.setDefault('amount', 1);
-        Session.setDefault('address', "");
-        Session.setDefault('uri', 'bitcoin:1DKwqRhDmVyHJDL4FUYpDmQMYA3Rsxtvur?amount=0.01');
+        if (window.localStorage.getItem('address')){
+            Session.set('address', window.localStorage.getItem('address'))
+        }
+        else{
+            Session.set('address', '');
+        }
         Session.setDefault('price', 0);
-        Session.setDefault('api_key', '');
+        if (!window.localStorage.getItem('api_key')){
+            Session.setDefault('api_key', '');
+        }
+        else {
+            Session.set('api_key', window.localStorage.getItem('api_key'));
+            Session.set('api_secret', window.localStorage.getItem('api_secret'));
+        }
         var url = "https://api.bitfinex.com/v1";
         var w = new WebSocket("wss://api2.bitfinex.com:3000/ws");
         w.onopen = function () {
@@ -83,6 +93,7 @@ if (Meteor.isClient) {
         };
         HTTP.post("https://api.bitfinex.com/v1/deposit/new", options, function (error, data) {
             Session.set('address', data.data.address.address);
+            window.localStorage.setItem('address', data.data.address.address);
         });
     }
     Template.auth.events({
@@ -90,6 +101,8 @@ if (Meteor.isClient) {
             event.preventDefault();
             var api_key = event.target.api_key.value;
             var api_secret = event.target.api_secret.value;
+            window.localStorage.setItem('api_key', api_key);
+            window.localStorage.setItem('api_secret', api_secret);
             Session.set('api_key', api_key);
             Session.set('api_secret', api_secret);
             event.target.api_key.value = '';
