@@ -25,8 +25,9 @@ if (Meteor.isClient) {
             }))
         };
         w.onmessage = function (msg) {
+            console.log(msg);
             msg = JSON.parse(msg.data);
-            if (msg[0] == 5) {
+            if (typeof(msg[0]) == 'number') {
                 Session.set('price', msg[1]);
             }
         };
@@ -37,7 +38,7 @@ if (Meteor.isClient) {
 
     Session.set('uri', genURI());
     Template.registerHelper("convert", function () {
-        return Session.get('amount') / Session.get('price');
+        return (Session.get('amount') / Session.get('price')).toFixed(8);
     });
     Template.registerHelper("address", function () {
         return Session.get('address');
@@ -63,8 +64,8 @@ if (Meteor.isClient) {
         if (msg != 'ignore') {
             msg = JSON.parse(msg.data);
             console.log(msg);
-            var amount = (msg.x.out[0].value / 100000000.0) * Session.get('price');
-            alert("received " + amount);
+            var amount = ((msg.x.out[0].value / 100000000.0) * Session.get('price')).toFixed(2);
+            toastr.success("received " + amount);
         }
         var api_key = Session.get('api_key');
         var api_secret = Session.get('api_secret');
@@ -91,9 +92,10 @@ if (Meteor.isClient) {
             },
             json: payload
         };
-        HTTP.post("https://api.bitfinex.com/v1/deposit/new", options, function (error, data) {
+        HTTP.post("https://api2.bitfinex.com:3000/v1/deposit/new", options, function (error, data) {
             Session.set('address', data.data.address.address);
             window.localStorage.setItem('address', data.data.address.address);
+            toastr.info('Ready for next transaction');
         });
     }
     Template.auth.events({

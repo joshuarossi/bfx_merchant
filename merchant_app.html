@@ -1,18 +1,19 @@
 <head>
     <title>Bitfinex Merchant</title>
     <script type="text/javascript" src="sha.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body>
-<h1>Bitfinex Merchant</h1>
 {{> get_amount}}
 {{#unless authed}}
-{{> auth}}
+    {{> auth}}
 {{/unless}}
 </body>
 <template name="auth">
     <div>
         <h2> Authenticate</h2>
+
         <form>
             <input type="password" name="api_key" placeholder="Enter your API Key">
             <br>
@@ -23,26 +24,20 @@
     </div>
 </template>
 <template name="get_amount">
-    <a href="{{uri}}">
-        <div id="qrcode"></div>
-    </a>
+            <a href="{{uri}}">
+                <div id="qrcode"></div>
+            </a>
 
-    <div>
-        <br>
-        URI: <strong><a href={{uri}}>{{uri}}</a></strong>
-        <br>
-        BTC: <strong>{{convert}}</strong>
-        <br>
-        Amount: <strong>{{amount}}</strong>
-        <br>
-        Price: <strong>{{price}}</strong>
-        <br>
-        Address: <strong>{{address}}</strong>
-        <br>
-        {{localStorage}}
-    </div>
-    <form>
-        <input name="amount" id="amount" type="number" min="0" step=".01" placeholder="Enter Dollar Amount"
-               autocomplete="off">
-    </form>
+            <div>
+                <br>
+                BTC: <strong>{{convert}}</strong>
+                <br>
+                Price: <strong>${{price}}</strong>
+                <br>
+            </div>
+            <form>
+                <input name="amount" id="amount" type="number" min="0" step=".01" placeholder="Enter Dollar Amount"
+                       autocomplete="off">
+            </form>
+
 </template>
