@@ -123,7 +123,7 @@ if (Meteor.isClient) {
             $("#qrcode > canvas").remove();
             $('#qrcode').qrcode({
                 text: genURI(),
-                label: 'bitfinex'
+                size: 400
             });
         });
     });

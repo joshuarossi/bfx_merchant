@@ -5,39 +5,64 @@
 </head>
 
 <body>
-{{> get_amount}}
+
 {{#unless authed}}
     {{> auth}}
+{{else}}
+    {{> get_amount}}
 {{/unless}}
+<script>$.material.init()</script>
 </body>
 <template name="auth">
     <div>
         <h2> Authenticate</h2>
 
         <form>
-            <input type="password" name="api_key" placeholder="Enter your API Key">
+            <input class="form-control" type="password" name="api_key" placeholder="Enter your API Key">
             <br>
-            <input type="password" name="api_secret" placeholder="Enter your API Secret">
+            <input class="form-control" type="password" name="api_secret" placeholder="Enter your API Secret">
             <br>
-            <input type="submit" value="Submit">
+            <input class="form-control" type="submit" value="Submit">
         </form>
     </div>
 </template>
 <template name="get_amount">
-            <a href="{{uri}}">
-                <div id="qrcode"></div>
-            </a>
-
-            <div>
-                <br>
-                BTC: <strong>{{convert}}</strong>
-                <br>
-                Price: <strong>${{price}}</strong>
-                <br>
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">
+                    <img alt="Brand" src="logo2.png">
+                </a>
             </div>
-            <form>
-                <input name="amount" id="amount" type="number" min="0" step=".01" placeholder="Enter Dollar Amount"
-                       autocomplete="off">
-            </form>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="jumbotron">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <div id="qrcode"></div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <br>
+                    BTC: <strong>{{convert}}</strong>
+                    <br>
+                    Price: <strong>${{price}}</strong>
+                    <br>
+                </div>
+                <form class="form-horizontal">
+                    <div class="form-group form-group-lg">
+                        <div class="col-md-6 col-md-offset-3">
+                            <input name="amount" id="amount" min="0" step=".01" class="form-control" type="number"
+                                    placeholder="Enter Dollar Amount" autocomplete="off"
+                                   autofocus>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
 </template>
