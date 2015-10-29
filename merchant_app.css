@@ -1,12 +1,14 @@
 /* CSS declarations go here */
 input {
-  width: auto;
+    width: auto;
+    margin-top: 20px;
 }
 
-.col-centered{
+.col-centered {
     float: none;
     margin: 0 auto;
 }
+
 .navbar.navbar {
     background-color: snow;
 }

@@ -65,7 +65,7 @@ if (Meteor.isClient) {
             msg = JSON.parse(msg.data);
             console.log(msg);
             var amount = ((msg.x.out[0].value / 100000000.0) * Session.get('price')).toFixed(2);
-            toastr.success("received " + amount);
+            toastr.success("Received $" + amount);
         }
         var api_key = Session.get('api_key');
         var api_secret = Session.get('api_secret');
@@ -123,7 +123,7 @@ if (Meteor.isClient) {
             $("#qrcode > canvas").remove();
             $('#qrcode').qrcode({
                 text: genURI(),
-                size: 400
+                size: 270
             });
         });
     });
