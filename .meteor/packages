@@ -21,3 +21,5 @@ insecure                # Allow all DB writes from clients (for prototyping)
 bootstrap
 http
 dschulz:jquery-qrcode
+jparker:crypto-hmac
+base64

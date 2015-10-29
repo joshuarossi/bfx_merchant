@@ -1,20 +1,18 @@
 <head>
     <title>Bitfinex Merchant</title>
-
+    <script type="text/javascript" src="sha.js"></script>
 </head>
 
 <body>
 <h1>Bitfinex Merchant</h1>
-{{#unless has_creds}}
-    {{> auth}}
-{{else}}
-    {{> get_amount}}
+{{> get_amount}}
+{{#unless authed}}
+{{> auth}}
 {{/unless}}
 </body>
 <template name="auth">
     <div>
         <h2> Authenticate</h2>
-
         <form>
             <input type="password" name="api_key" placeholder="Enter your API Key">
             <br>
@@ -43,8 +41,7 @@
         <br>
     </div>
     <form>
-        <input name="amount" id="amount" type="number" min="0" step=".01" placeholder="Enter Dollar Amount" autocomplete="off">
-        <br>
-        <input name="address" id="address" type="text" placeholder="Enter Address">
+        <input name="amount" id="amount" type="number" min="0" step=".01" placeholder="Enter Dollar Amount"
+               autocomplete="off">
     </form>
 </template>
