@@ -31,6 +31,11 @@ if (Meteor.isClient) {
                 Session.set('price', msg[1]);
             }
         };
+        toastr.options = {
+            "newestOnTop": true,
+            "progressBar": true,
+            "positionClass": "toast-top-center"
+        }
     });
     function genURI() {
         return "bitcoin:" + Session.get('address') + "?amount=" + (Session.get('amount') / Session.get('price'));
